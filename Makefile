@@ -5,4 +5,6 @@ LIBNAME	= yonk-intent
 LIBVER	= 0
 LIBREV	= 0.1
 
+DEPENDS = capsa
+
 include make-core.mk
