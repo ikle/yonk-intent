@@ -24,6 +24,7 @@ struct yonk_intent *yonk_intent_read (FILE *from);
 
 void yonk_intent_free (struct yonk_intent *o);
 
+int yonk_intent_match (struct yonk_intent *o, int argc, char *argv[]);
 int yonk_intent_write (struct yonk_intent *o, FILE *to);
 int yonk_intent_show  (struct yonk_intent *o, FILE *to, int json);
 

@@ -6,23 +6,7 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-#include <string.h>
-
 #include <yonk/patch.h>
-
-static int match_prefix (struct yonk_intent *o, int argc, char *argv[])
-{
-	int i;
-
-	if (o->argc < argc)
-		return 0;
-
-	for (i = 0; i < argc; ++i)
-		if (strcmp (o->argv[i], argv[i]) != 0)
-			return 0;
-
-	return 1;
-}
 
 int yonk_patch_drop (struct yonk_patch *o, int argc, char *argv[])
 {
@@ -32,7 +16,7 @@ int yonk_patch_drop (struct yonk_patch *o, int argc, char *argv[])
 	yonk_intent_seq_init (&s);
 
 	while ((e = yonk_intent_seq_dequeue (&o->seq)) != NULL)
-		if (match_prefix (e, argc, argv))
+		if (yonk_intent_match (e, argc, argv))
 			yonk_intent_free (e);
 		else
 			yonk_intent_seq_enqueue (&s, e);
