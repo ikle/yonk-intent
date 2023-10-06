@@ -9,6 +9,7 @@
 #ifndef YONK_RIB_H
 #define YONK_RIB_H  1
 
+#include <stdio.h>
 #include <string.h>
 
 #include <capsa/tree.h>
@@ -40,6 +41,8 @@ static inline int yonk_rib_order (const char *key, const struct yonk_rib *o)
 }
 
 TREE_DECLARE_CORE (yonk_rib)
+
+void yonk_rib_show (struct yonk_rib *o, FILE *to);
 
 static inline
 struct yonk_rib *yonk_rib_find (struct yonk_rib *o, const char *name)
