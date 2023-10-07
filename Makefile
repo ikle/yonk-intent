@@ -3,7 +3,7 @@ URL = https://github.com/ikle/yonk-intent
 
 LIBNAME	= yonk-intent
 LIBVER	= 0
-LIBREV	= 0.3
+LIBREV	= 0.4
 
 DEPENDS = capsa
 

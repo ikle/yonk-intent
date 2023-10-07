@@ -7,6 +7,7 @@
  */
 
 #include <yonk/rib.h>
+#include <yonk/string.h>
 
 struct ctx {
 	FILE *to;
@@ -29,14 +30,20 @@ static void yonk_rib_emit_attr (struct yonk_rib *o, void *cookie)
 {
 	struct ctx *c = cookie;
 
-	indent (o, c); fprintf (c->to, "%s = %s\n", o->parent->name, o->name);
+	indent (o, c);
+	fputs (o->parent->name, c->to);
+	yonk_string_show (" = ", o->name, 1, c->to);
+	fputc ('\n', c->to);
 }
 
 static void yonk_rib_emit_node (struct yonk_rib *o, void *cookie)
 {
 	struct ctx *c = cookie, next = { c->to, c->level + 1 };
 
-	indent (o, c); fprintf (c->to, "%s %s {\n", o->parent->name, o->name);
+	indent (o, c);
+	fputs (o->parent->name, c->to);
+	yonk_string_show (" ", o->name, 1, c->to);
+	fputs (" {\n", c->to);
 	yonk_rib_tree_emit (&o->childs, &next);
 	indent (o, c); fprintf (c->to, "}\n");
 }

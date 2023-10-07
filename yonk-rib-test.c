@@ -35,9 +35,12 @@ static int pull_iface_conf (struct yonk_rib *root)
 	return	(o = add_group (root, "interfaces"))   != NULL &&
 		(o = add_node (o, "ethernet", "eth1")) != NULL &&
 		add_attr (o, "mtu", "1400") &&
+		add_attr (o, "description", "Local Network") &&
 		add_attr (o, "address", "10.0.30.1/24") &&
 		add_attr (o, "address", "10.0.27.1/24") &&
-		add_attr (o, "address", "10.0.28.1/24");
+		add_attr (o, "address", "10.0.28.1/24") &&
+		(o = add_group (root, "service"))          != NULL &&
+		(o = add_node (o, "test", "Cool Service")) != NULL;
 }
 
 int main (int argc, char *argv[])
