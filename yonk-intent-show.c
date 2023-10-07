@@ -9,24 +9,7 @@
 #include <string.h>
 
 #include <yonk/intent.h>
-
-static int show_escaped (const char *s, FILE *to)
-{
-	if (fputc ('"', to) == EOF)
-		return 0;
-
-	for (; *s != '\0'; ++s)
-		switch (*s) {
-		case '"': case '\\':
-			if (fputc ('\\', to) == EOF)
-				return 0;
-		default:
-			if (fputc (*s, to) == EOF)
-				return 0;
-		}
-
-	return fputc ('"', to) != EOF;
-}
+#include <yonk/string.h>
 
 static int show_json (struct yonk_intent *o, FILE *to)
 {
@@ -36,7 +19,7 @@ static int show_json (struct yonk_intent *o, FILE *to)
 		return 0;
 
 	for (i = 0; i < o->argc; ++i)
-		if (fputc (',', to) == EOF || !show_escaped (o->argv[i], to))
+		if (!yonk_string_show (",", o->argv[i], 0, to))
 			return 0;
 
 	return fputc (']', to) != EOF;
@@ -50,15 +33,8 @@ static int show_plain (struct yonk_intent *o, FILE *to)
 		return 0;
 
 	for (i = 0; i < o->argc; ++i)
-		if (o->argv[i][strcspn (o->argv[i], " \"\\")] == '\0') {
-			if (fprintf (to, " %s", o->argv[i]) < 0)
-				return 0;
-		}
-		else {
-			if (fputc (' ', to) == EOF ||
-			    !show_escaped (o->argv[i], to))
-				return 0;
-		}
+		if (!yonk_string_show (" ", o->argv[i], 1, to))
+			return 0;
 
 	return fputc ('\n', to) != EOF;
 }
