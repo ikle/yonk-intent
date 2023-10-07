@@ -27,7 +27,7 @@ TREE_DECLARE_TYPE (yonk_rib)
 struct yonk_rib {
 	struct yonk_rib *parent;
 	struct avl node;
-	int kind, mode;
+	char kind, mark;
 	char *name;
 	struct yonk_rib_tree childs;
 };

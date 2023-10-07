@@ -24,7 +24,7 @@ struct yonk_rib *yonk_rib_alloc (const char *name)
 
 	o->parent = NULL;
 	o->kind = YONK_GROUP;
-	o->mode = 0;
+	o->mark = ' ';
 	yonk_rib_tree_init (&o->childs);
 	return o;
 }

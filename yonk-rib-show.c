@@ -13,9 +13,11 @@ struct ctx {
 	int level;
 };
 
-static void indent (struct ctx *c)
+static void indent (struct yonk_rib *o, struct ctx *c)
 {
 	int i;
+
+	fprintf (c->to, "%c ", o->mark);
 
 	for (i = c->level; i > 0; --i)
 		fputs ("    ", c->to);
@@ -27,25 +29,25 @@ static void yonk_rib_emit_attr (struct yonk_rib *o, void *cookie)
 {
 	struct ctx *c = cookie;
 
-	indent (c); fprintf (c->to, "%s = %s\n", o->parent->name, o->name);
+	indent (o, c); fprintf (c->to, "%s = %s\n", o->parent->name, o->name);
 }
 
 static void yonk_rib_emit_node (struct yonk_rib *o, void *cookie)
 {
 	struct ctx *c = cookie, next = { c->to, c->level + 1 };
 
-	indent (c); fprintf (c->to, "%s %s {\n", o->parent->name, o->name);
+	indent (o, c); fprintf (c->to, "%s %s {\n", o->parent->name, o->name);
 	yonk_rib_tree_emit (&o->childs, &next);
-	indent (c); fprintf (c->to, "}\n");
+	indent (o, c); fprintf (c->to, "}\n");
 }
 
 static void yonk_rib_emit_group (struct yonk_rib *o, void *cookie)
 {
 	struct ctx *c = cookie, next = { c->to, c->level + 1 };
 
-	indent (c); fprintf (c->to, "%s {\n", o->name);
+	indent (o, c); fprintf (c->to, "%s {\n", o->name);
 	yonk_rib_tree_emit (&o->childs, &next);
-	indent (c); fprintf (c->to, "}\n");
+	indent (o, c); fprintf (c->to, "}\n");
 }
 
 TREE_DECLARE_WALK (yonk_rib, emit_attr)
