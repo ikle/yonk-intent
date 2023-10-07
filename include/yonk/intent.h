@@ -1,5 +1,5 @@
 /*
- * Yonk Intents and Patches
+ * Yonk Intent
  *
  * Copyright (c) 2022-2023 Alexei A. Smekalkine <ikle@ikle.ru>
  *
