@@ -9,7 +9,6 @@
 #ifndef YONK_INTENT_H
 #define YONK_INTENT_H  1
 
-#include <stdarg.h>
 #include <stdio.h>
 
 struct yonk_intent {
