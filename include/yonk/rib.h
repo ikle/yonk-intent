@@ -45,13 +45,13 @@ TREE_DECLARE_CORE (yonk_rib)
 void yonk_rib_show (struct yonk_rib *o, FILE *to);
 
 static inline
-struct yonk_rib *yonk_rib_find (struct yonk_rib *o, const char *name)
+struct yonk_rib *yonk_rib_lookup (struct yonk_rib *o, const char *name)
 {
 	return yonk_rib_tree_lookup (&o->childs, name);
 }
 
 static inline
-struct yonk_rib *yonk_rib_add (struct yonk_rib *o, int kind, const char *name)
+struct yonk_rib *yonk_rib_insert (struct yonk_rib *o, int kind, const char *name)
 {
 	struct yonk_rib *n;
 
@@ -63,7 +63,7 @@ struct yonk_rib *yonk_rib_add (struct yonk_rib *o, int kind, const char *name)
 	return n;
 }
 
-static inline void yonk_rib_del (struct yonk_rib *o, const char *name)
+static inline void yonk_rib_remove (struct yonk_rib *o, const char *name)
 {
 	yonk_rib_free (yonk_rib_tree_remove (&o->childs, name));
 }

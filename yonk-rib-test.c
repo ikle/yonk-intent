@@ -12,20 +12,20 @@
 
 static struct yonk_rib *add_group (struct yonk_rib *o, const char *name)
 {
-	return yonk_rib_add (o, YONK_GROUP, name);
+	return yonk_rib_insert (o, YONK_GROUP, name);
 }
 
 static
 struct yonk_rib *add_node (struct yonk_rib *o, const char *name, const char *tag)
 {
-	return	(o = yonk_rib_add (o, YONK_NODE, name)) == NULL ? NULL :
-		yonk_rib_add (o, YONK_TAG, tag);
+	return	(o = yonk_rib_insert (o, YONK_NODE, name)) == NULL ? NULL :
+		yonk_rib_insert (o, YONK_TAG, tag);
 }
 
 static int add_attr (struct yonk_rib *o, const char *name, const char *value)
 {
-	return	(o = yonk_rib_add (o, YONK_ATTR, name)) != NULL &&
-		yonk_rib_add (o, YONK_VALUE, value) != NULL;
+	return	(o = yonk_rib_insert (o, YONK_ATTR, name)) != NULL &&
+		yonk_rib_insert (o, YONK_VALUE, value) != NULL;
 }
 
 static int pull_iface_conf (struct yonk_rib *root)
