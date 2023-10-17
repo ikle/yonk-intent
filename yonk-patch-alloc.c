@@ -8,7 +8,7 @@
 
 #include <stdlib.h>
 
-#include <yonk/patch.h>
+#include "yonk-patch-int.h"
 
 struct yonk_patch *yonk_patch_alloc (void)
 {

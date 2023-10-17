@@ -6,7 +6,7 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-#include <yonk/patch.h>
+#include "yonk-patch-int.h"
 
 struct yonk_patch *yonk_patch_read (const char *path)
 {

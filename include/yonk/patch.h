@@ -10,15 +10,7 @@
 #define YONK_PATCH_H  1
 
 #include <stdio.h>
-
-#include <capsa/seq.h>
 #include <yonk/intent.h>
-
-SEQ_DECLARE (yonk_intent)
-
-struct yonk_patch {
-	struct yonk_intent_seq seq;
-};
 
 struct yonk_patch *yonk_patch_alloc (void);
 void yonk_patch_free (struct yonk_patch *o);

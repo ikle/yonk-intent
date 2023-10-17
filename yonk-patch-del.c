@@ -6,7 +6,7 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-#include <yonk/patch.h>
+#include "yonk-patch-int.h"
 
 static int parent_deleted (struct yonk_intent *o, struct yonk_intent *list)
 {
