@@ -38,6 +38,8 @@ int main (int argc, char *argv[])
 	if ((o = yonk_ossa_alloc ()) == NULL)
 		return die (o, "E: ossa alloc");
 
+	puts ("---- insertion test ----\n");
+
 	if (!test_add (o))
 		return die (o, "E: ossa insert");
 
@@ -45,6 +47,15 @@ int main (int argc, char *argv[])
 
 	if (!yonk_ossa_write (o, "yonk-ossa-test.db"))
 		return die (o, "E: ossa write");
+
+	yonk_ossa_free (o);
+
+	puts ("\n---- reader test ----\n");
+
+	if ((o = yonk_ossa_read ("yonk-ossa-test.db")) == NULL)
+		return die (o, "E: ossa read");
+
+	yonk_ossa_show (o, stdout);
 
 	yonk_ossa_free (o);
 	return 0;
