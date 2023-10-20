@@ -13,14 +13,7 @@
 #include <string.h>
 
 #include <capsa/tree.h>
-
-enum yonk_kind {
-	YONK_GROUP = 0,
-	YONK_NODE,
-	YONK_TAG,
-	YONK_ATTR,
-	YONK_VALUE,
-};
+#include <yonk/ossa.h>
 
 TREE_DECLARE_TYPE (yonk_rib)
 
